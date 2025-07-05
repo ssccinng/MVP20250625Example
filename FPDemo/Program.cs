@@ -5,18 +5,32 @@ using System.Globalization;
 using static LanguageExt.Prelude;
 
 Console.WriteLine("Hello, World!");
+
+Console.WriteLine(Age.Create(360));
+
 public record Age(int Value)
 {
     public static bool operator >(Age left, Age right) => left.Value > right.Value;
     public static bool operator <(Age left, Age right) => left.Value < right.Value;
     public static Either<string, Age> Create(int value) =>
-        value < 0 ? "Age cannot be negative" : new Age(value);
+        value switch
+        {
+            > 130 => ("Age cannot be greater than 130"),
+            < 0 => ("Age cannot be negative"),
+            _ => (new Age(value))
+        };
 };
 public record Book(string Id, string Title, string Author, PublishState PublishState, Age AgeLimit);
+
+
+
 public interface PublishState;
 public record Published : PublishState;
 public record Unpublished : PublishState;
 public record Withdrawn : PublishState;
+
+
+
 
 public record Inventory(ImmutableDictionary<string, int> Stock)
 {

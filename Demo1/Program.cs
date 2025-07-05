@@ -37,7 +37,7 @@ public class User
 {
     public string Id { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
-    public int Age { get; set; }
+    public int Age { get; set; } = 999;
     public List<Book> BorrowedBooks { get; set; } = new List<Book>();
 
     public int MaxBorrowedBooks { get; set; } = 5;
